@@ -967,6 +967,44 @@ spec:
                   template:
                     type: string
                 type: object
+              exporterImage:
+                description: ImageOverride allows overriding image parameters for
+                  containers
+                properties:
+                  digest:
+                    type: string
+                  pullPolicy:
+                    type: string
+                  pullSecrets:
+                    items:
+                      type: string
+                    type: array
+                  registry:
+                    type: string
+                  repository:
+                    type: string
+                  tag:
+                    type: string
+                type: object
+              kubectlImage:
+                description: ImageOverride allows overriding image parameters for
+                  containers
+                properties:
+                  digest:
+                    type: string
+                  pullPolicy:
+                    type: string
+                  pullSecrets:
+                    items:
+                      type: string
+                    type: array
+                  registry:
+                    type: string
+                  repository:
+                    type: string
+                  tag:
+                    type: string
+                type: object
               metrics:
                 description: MetricsProperties models attributes of the metrics exporter
                   sidecar
@@ -1492,6 +1530,25 @@ spec:
               nodeSelector:
                 additionalProperties:
                   type: string
+                type: object
+              osShellImage:
+                description: ImageOverride allows overriding image parameters for
+                  containers
+                properties:
+                  digest:
+                    type: string
+                  pullPolicy:
+                    type: string
+                  pullSecrets:
+                    items:
+                      type: string
+                    type: array
+                  registry:
+                    type: string
+                  repository:
+                    type: string
+                  tag:
+                    type: string
                 type: object
               persistence:
                 description: PersistenceProperties models persistence related attributes
@@ -3542,6 +3599,25 @@ spec:
                 type: object
               priorityClassName:
                 type: string
+              redisImage:
+                description: Image override fields for all images used in the Redis
+                  deployment
+                properties:
+                  digest:
+                    type: string
+                  pullPolicy:
+                    type: string
+                  pullSecrets:
+                    items:
+                      type: string
+                    type: array
+                  registry:
+                    type: string
+                  repository:
+                    type: string
+                  tag:
+                    type: string
+                type: object
               replicas:
                 default: 1
                 minimum: 1
@@ -4059,6 +4135,25 @@ spec:
                             type: string
                         type: object
                     type: object
+                type: object
+              sentinelImage:
+                description: ImageOverride allows overriding image parameters for
+                  containers
+                properties:
+                  digest:
+                    type: string
+                  pullPolicy:
+                    type: string
+                  pullSecrets:
+                    items:
+                      type: string
+                    type: array
+                  registry:
+                    type: string
+                  repository:
+                    type: string
+                  tag:
+                    type: string
                 type: object
               sidecars:
                 items:
@@ -5488,6 +5583,25 @@ spec:
                   - name
                   type: object
                 type: array
+              sysctlImage:
+                description: ImageOverride allows overriding image parameters for
+                  containers
+                properties:
+                  digest:
+                    type: string
+                  pullPolicy:
+                    type: string
+                  pullSecrets:
+                    items:
+                      type: string
+                    type: array
+                  registry:
+                    type: string
+                  repository:
+                    type: string
+                  tag:
+                    type: string
+                type: object
               tls:
                 description: TLSProperties models TLS settings of the redis services
                 properties:
@@ -5723,6 +5837,25 @@ spec:
                 type: array
               version:
                 type: string
+              volumePermissionsImage:
+                description: ImageOverride allows overriding image parameters for
+                  containers
+                properties:
+                  digest:
+                    type: string
+                  pullPolicy:
+                    type: string
+                  pullSecrets:
+                    items:
+                      type: string
+                    type: array
+                  registry:
+                    type: string
+                  repository:
+                    type: string
+                  tag:
+                    type: string
+                type: object
             type: object
           status:
             default:

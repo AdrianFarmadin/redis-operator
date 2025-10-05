@@ -14,9 +14,176 @@ fullnameOverride: {{ $fullname }}
 {{- $bindingSecretName = printf "%s-binding" $fullname }}
 {{- end }}
 
-{{- with .version}}
+
+# Render image overrides from CRD if set, else fallback to .version for main image tag
+{{- if .redisImage }}
 image:
+  {{- with .redisImage.registry }}
+  registry: {{ . }}
+  {{- end }}
+  {{- with .redisImage.repository }}
+  repository: {{ . }}
+  {{- end }}
+  {{- with .redisImage.tag }}
   tag: {{ . }}
+  {{- end }}
+  {{- with .redisImage.digest }}
+  digest: {{ . }}
+  {{- end }}
+  {{- with .redisImage.pullPolicy }}
+  pullPolicy: {{ . }}
+  {{- end }}
+  {{- with .redisImage.pullSecrets }}
+    pullSecrets:
+      {{- toYaml . | nindent 6 }}
+  {{- end }}
+{{- else if .version }}
+image:
+  tag: {{ .version }}
+{{- end }}
+
+{{- if .sentinelImage }}
+sentinel:
+  image:
+    {{- with .sentinelImage.registry }}
+    registry: {{ . }}
+    {{- end }}
+    {{- with .sentinelImage.repository }}
+    repository: {{ . }}
+    {{- end }}
+    {{- with .sentinelImage.tag }}
+    tag: {{ . }}
+    {{- end }}
+    {{- with .sentinelImage.digest }}
+    digest: {{ . }}
+    {{- end }}
+    {{- with .sentinelImage.pullPolicy }}
+    pullPolicy: {{ . }}
+    {{- end }}
+    {{- with .sentinelImage.pullSecrets }}
+    pullSecrets:
+      {{- toYaml . | nindent 6 }}
+    {{- end }}
+{{- end }}
+
+{{- if .exporterImage }}
+metrics:
+  image:
+    {{- with .exporterImage.registry }}
+    registry: {{ . }}
+    {{- end }}
+    {{- with .exporterImage.repository }}
+    repository: {{ . }}
+    {{- end }}
+    {{- with .exporterImage.tag }}
+    tag: {{ . }}
+    {{- end }}
+    {{- with .exporterImage.digest }}
+    digest: {{ . }}
+    {{- end }}
+    {{- with .exporterImage.pullPolicy }}
+    pullPolicy: {{ . }}
+    {{- end }}
+    {{- with .exporterImage.pullSecrets }}
+    pullSecrets:
+      {{- toYaml . | nindent 6 }}
+    {{- end }}
+{{- end }}
+
+{{- if .sysctlImage }}
+sysctl:
+  image:
+    {{- with .sysctlImage.registry }}
+    registry: {{ . }}
+    {{- end }}
+    {{- with .sysctlImage.repository }}
+    repository: {{ . }}
+    {{- end }}
+    {{- with .sysctlImage.tag }}
+    tag: {{ . }}
+    {{- end }}
+    {{- with .sysctlImage.digest }}
+    digest: {{ . }}
+    {{- end }}
+    {{- with .sysctlImage.pullPolicy }}
+    pullPolicy: {{ . }}
+    {{- end }}
+    {{- with .sysctlImage.pullSecrets }}
+    pullSecrets:
+      {{- toYaml . | nindent 6 }}
+    {{- end }}
+{{- end }}
+
+{{- if .volumePermissionsImage }}
+volumePermissions:
+  image:
+    {{- with .volumePermissionsImage.registry }}
+    registry: {{ . }}
+    {{- end }}
+    {{- with .volumePermissionsImage.repository }}
+    repository: {{ . }}
+    {{- end }}
+    {{- with .volumePermissionsImage.tag }}
+    tag: {{ . }}
+    {{- end }}
+    {{- with .volumePermissionsImage.digest }}
+    digest: {{ . }}
+    {{- end }}
+    {{- with .volumePermissionsImage.pullPolicy }}
+    pullPolicy: {{ . }}
+    {{- end }}
+    {{- with .volumePermissionsImage.pullSecrets }}
+    pullSecrets:
+      {{- toYaml . | nindent 6 }}
+    {{- end }}
+{{- end }}
+
+{{- if .kubectlImage }}
+kubectl:
+  image:
+    {{- with .kubectlImage.registry }}
+    registry: {{ . }}
+    {{- end }}
+    {{- with .kubectlImage.repository }}
+    repository: {{ . }}
+    {{- end }}
+    {{- with .kubectlImage.tag }}
+    tag: {{ . }}
+    {{- end }}
+    {{- with .kubectlImage.digest }}
+    digest: {{ . }}
+    {{- end }}
+    {{- with .kubectlImage.pullPolicy }}
+    pullPolicy: {{ . }}
+    {{- end }}
+    {{- with .kubectlImage.pullSecrets }}
+    pullSecrets:
+      {{- toYaml . | nindent 6 }}
+    {{- end }}
+{{- end }}
+
+{{- if .osShellImage }}
+osShell:
+  image:
+    {{- with .osShellImage.registry }}
+    registry: {{ . }}
+    {{- end }}
+    {{- with .osShellImage.repository }}
+    repository: {{ . }}
+    {{- end }}
+    {{- with .osShellImage.tag }}
+    tag: {{ . }}
+    {{- end }}
+    {{- with .osShellImage.digest }}
+    digest: {{ . }}
+    {{- end }}
+    {{- with .osShellImage.pullPolicy }}
+    pullPolicy: {{ . }}
+    {{- end }}
+    {{- with .osShellImage.pullSecrets }}
+    pullSecrets:
+      {{- toYaml . | nindent 6 }}
+    {{- end }}
 {{- end }}
 
 {{- if $persistenceEnabled }}

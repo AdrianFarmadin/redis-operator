@@ -30,6 +30,25 @@ type RedisSpec struct {
 	TLS                                     *TLSProperties         `json:"tls,omitempty"`
 	Persistence                             *PersistenceProperties `json:"persistence,omitempty"`
 	Binding                                 *BindingProperties     `json:"binding,omitempty"`
+
+	// Image override fields for all images used in the Redis deployment
+	RedisImage             *ImageOverride `json:"redisImage,omitempty"`
+	SentinelImage          *ImageOverride `json:"sentinelImage,omitempty"`
+	ExporterImage          *ImageOverride `json:"exporterImage,omitempty"`
+	SysctlImage            *ImageOverride `json:"sysctlImage,omitempty"`
+	VolumePermissionsImage *ImageOverride `json:"volumePermissionsImage,omitempty"`
+	KubectlImage           *ImageOverride `json:"kubectlImage,omitempty"`
+	OsShellImage           *ImageOverride `json:"osShellImage,omitempty"`
+}
+
+// ImageOverride allows overriding image parameters for containers
+type ImageOverride struct {
+	Registry    string   `json:"registry,omitempty"`
+	Repository  string   `json:"repository,omitempty"`
+	Tag         string   `json:"tag,omitempty"`
+	Digest      string   `json:"digest,omitempty"`
+	PullPolicy  string   `json:"pullPolicy,omitempty"`
+	PullSecrets []string `json:"pullSecrets,omitempty"`
 }
 
 // SentinelProperties models attributes of the sentinel sidecar
